@@ -96,7 +96,7 @@ public class GlobalReportTest {
   public void noIssuesWithProjectId() {
     GlobalReport globalReport = new GlobalReport(new MarkDownUtils(settings), true, "project-id");
 
-    String desiredMarkdown = "[project-id] SonarQube analysis reported no issues.";
+    String desiredMarkdown = "\n\n[project-id]: project-id\n\nSonarQube analysis reported no issues.";
 
     String formattedGlobalReport = globalReport.formatForMarkdown();
 
@@ -123,10 +123,13 @@ public class GlobalReportTest {
     GlobalReport globalReport = new GlobalReport(new MarkDownUtils(settings), true, "project-id");
     globalReport.process(newMockedIssue("component", null, null, Severity.INFO, true, "Issue", "rule"), GITHUB_URL, true);
 
-    String desiredMarkdown = "[project-id] SonarQube analysis reported 1 issue\n" +
+    String desiredMarkdown = "\n\n[project-id]: project-id\n\nSonarQube " +
+            "analysis " +
+            "reported 1 issue\n" +
             "* ![INFO][INFO] 1 info\n" +
             "\nWatch the comments in this conversation to review them.\n" +
-            "\n[INFO]: https://sonarsource.github.io/sonar-github/severity-info.png 'Severity: INFO'";
+            "\n[INFO]: https://sonarsource.github" +
+            ".io/sonar-github/severity-info.png 'Severity: INFO'";
 
     String formattedGlobalReport = globalReport.formatForMarkdown();
 

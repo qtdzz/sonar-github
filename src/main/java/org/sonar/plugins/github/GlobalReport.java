@@ -56,9 +56,7 @@ public class GlobalReport {
 
     boolean hasInlineIssues = newIssues > extraIssueCount;
     boolean extraIssuesTruncated = extraIssueCount > maxGlobalReportedIssues;
-    if (!StringUtils.isEmpty(projectId)) {
-      builder.appendProjectId(projectId).append(" ");
-    }
+      builder.appendProjectId(projectId);
     if (newIssues == 0) {
       builder.append("SonarQube analysis reported no issues.");
       return builder.toString();
@@ -75,7 +73,6 @@ public class GlobalReport {
     if (extraIssueCount > 0) {
       appendExtraIssues(builder, hasInlineIssues, extraIssuesTruncated);
     }
-
     return builder.toString();
   }
 
